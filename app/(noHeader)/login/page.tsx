@@ -35,7 +35,7 @@ export default function Home() {
     setCookie('token', body.token, { sameSite: 'none', secure: true })
 
     // redirect.
-    router.push('/profile')
+    router.push('/')
   }
 
   // https://flowbite.com/blocks/marketing/login/
