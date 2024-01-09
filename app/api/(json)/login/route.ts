@@ -1,6 +1,6 @@
 import { kv } from "@vercel/kv"
 import { unstable_noStore as noStore } from 'next/cache'
-import { User } from '../../../src/interfaces'
+import { User } from '../../../../src/interfaces'
 import { hash, compare } from 'bcrypt'
 
 export async function POST(request: Request) {
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   }
 
   const token = btoa(await hash(Math.random().toString(32), 1))
-  await kv.set<string>(`token:${token}`, '', { ex: 60 * 60 })
+  await kv.set<User>(`token:${token}`, user, { ex: 60 * 60 })
   console.log(token)
 
   return Response.json({ token: token })

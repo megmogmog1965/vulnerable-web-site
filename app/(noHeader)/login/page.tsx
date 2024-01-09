@@ -32,8 +32,7 @@ export default function Home() {
 
     // set cookie.
     const body = await res.json()
-    // setCookie('token', body.token, { sameSite: 'none', secure: true })
-    setCookie('token', body.token, { sameSite: 'lax', secure: false })
+    setCookie('token', body.token, { sameSite: 'none', secure: true })
 
     // redirect.
     router.push('/profile')

@@ -30,5 +30,5 @@ async function validToken(request: NextRequest): Promise<boolean> {
 // See "Matching Paths"
 // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 export const config = {
-  matcher: '/((?!_next/static|_next/image|favicon.ico|login|api/login|signup|api/signup).*)',
+  matcher: '/((?!_next/static|_next/image|favicon.ico|login|api/login|signup|api/user).*)',
 }

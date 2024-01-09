@@ -14,12 +14,12 @@ export default function Home() {
   const onSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
-    const res = await fetch('/api/signup', {
+    const res = await fetch('/api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({email: email, password: password, name: ''}),
+      body: JSON.stringify({ email: email, password: password, name: '', message: '' }),
     })
 
     // error handling.
