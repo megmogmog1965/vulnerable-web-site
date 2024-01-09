@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[volta]:https://volta.sh/
 
-## Getting Started
+# vulnerable-web-site
 
-First, run the development server:
+This is a project to reproduce following web application vulnerabilities.
+
+* CSRF (Cross-Site Request Forgery)
+* Clickjacking
+
+## Demo on Vercel
+
+https://vulnerable-web-site.vercel.app/
+
+## Getting Started (Dev)
+
+First, install Node.js `v20.10.0`, or [volta].
+
+```bash
+node -v
+# v20.10.0
+```
+
+Install Node.js modules.
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Deploy on Server
 
-## Learn More
+Build and start the server.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://{server-ip-address}:3000](http://localhost:3000) with your browser to see the result.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
+### Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### Deploy on AWS Amplify
+
+How to deploy Next.js with AWS Amplify.
+
+* [English](https://docs.aws.amazon.com/amplify/latest/userguide/deploy-nextjs-app.html)
+* [日本語](https://docs.aws.amazon.com/ja_jp/amplify/latest/userguide/deploy-nextjs-app.html)
