@@ -44,7 +44,7 @@ export default function RootLayout({
             <nav className="bg-white border-gray-200 border-b px-4 lg:px-6 py-2.5 dark:bg-gray-800">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg">
                     <Link href="/" className="flex items-center">
-                        <Image className="mr-2" src="/icon.png" width={32} height={32} alt="https://www.flaticon.com/free-icons/vulnerability - Vulnerability icons created by Dewi Sari - Flaticon" />
+                        <Image className="mr-2" src="/icon.png" width={32} height={32} alt="https://www.flaticon.com/free-icons/vulnerability - Vulnerability icons created by Dewi Sari - Flaticon" unoptimized />
                         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Vulnerable Web Site</span>
                     </Link>
                     <div className="flex items-center lg:order-2">
