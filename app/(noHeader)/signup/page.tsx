@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useState, MouseEvent } from 'react'
+import React, { useState, MouseEvent, useRef } from 'react'
 
 export default function Home() {
   const router = useRouter()
@@ -11,8 +11,19 @@ export default function Home() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const passwordRef = useRef<HTMLInputElement>(null)
+  const passwordConfirmationRef = useRef<HTMLInputElement>(null)
+
   const onSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
+
+    // password validation.
+    if (passwordRef?.current?.value !== passwordConfirmationRef?.current?.value) {
+      console.log(`pa: ${passwordConfirmationRef?.current?.value}`)
+      passwordConfirmationRef?.current?.setCustomValidity('Passwords Don\'t Match')
+      passwordConfirmationRef?.current?.reportValidity()
+      return
+    }
 
     const res = await fetch('/api/user', {
       method: 'POST',
@@ -51,11 +62,11 @@ export default function Home() {
                       </div>
                       <div>
                           <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                          <input type="password" name="password" id="password" placeholder="••••••••" autoComplete="new-password" value={password} onChange={event => setPassword(event.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={ false } />
+                          <input type="password" name="password" id="password" ref={passwordRef} placeholder="••••••••" autoComplete="new-password" value={password} onChange={event => setPassword(event.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={ false } />
                       </div>
                       <div>
                           <label htmlFor="passwordConfirmation" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
-                          <input type="password" name="passwordConfirmation" id="passwordConfirmation" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={ false } />
+                          <input type="password" name="passwordConfirmation" id="passwordConfirmation" ref={passwordConfirmationRef} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={ false } />
                       </div>
                       <button type="submit" onClick={onSubmit} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up</button>
                       <p className="text-sm font-light text-gray-500 dark:text-gray-400">

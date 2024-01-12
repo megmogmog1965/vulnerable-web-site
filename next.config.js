@@ -13,6 +13,35 @@ const nextConfig = {
       },
     ]
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '3000',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'vulnerable-web-site.vercel.app',
+        port: '443',
+        pathname: '/**',
+      },
+    ],
+  },
+  publicRuntimeConfig: {
+    remoteHosts: [
+      'localhost:3000',
+      '127.0.0.1:3000',
+      'vulnerable-web-site.vercel.app',
+    ],
+  },
 }
 
 module.exports = nextConfig

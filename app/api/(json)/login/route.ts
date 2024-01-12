@@ -1,6 +1,6 @@
 import { kv } from "@vercel/kv"
 import { unstable_noStore as noStore } from 'next/cache'
-import { User } from '../../../../src/interfaces'
+import { User } from '@/src/interfaces'
 import { hash, compare } from 'bcrypt'
 
 export async function POST(request: Request) {

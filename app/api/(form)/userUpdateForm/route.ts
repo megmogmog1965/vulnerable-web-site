@@ -1,6 +1,7 @@
 import { kv } from "@vercel/kv"
 import { unstable_noStore as noStore } from 'next/cache'
-import { User } from '../../../../src/interfaces'
+import { User } from '@/src/interfaces'
+import { isValidUrl } from '@/src/url'
 import { cookies } from 'next/headers'
 
 export async function POST(request: Request) {
@@ -9,6 +10,15 @@ export async function POST(request: Request) {
   const form = await request.formData()
   const name = form.get('name')?.valueOf()?.toString() ?? ''
   const message = form.get('message')?.valueOf()?.toString() ?? ''
+  const imageUrlStr = form.get('imageUrl')?.valueOf()?.toString() ?? ''
+
+  if (!isValidUrl(imageUrlStr)) {
+    const url = new URL(request.url)
+    const redirectUrl = new URL('profile/edit?error=Invalid Image URL.', `${url.protocol}//${url.host}`)
+    return Response.redirect(redirectUrl)
+  }
+
+  const imageUrl = new URL(imageUrlStr)
 
   const token = cookies().get('token')?.value
   console.log(token)
@@ -22,7 +32,7 @@ export async function POST(request: Request) {
   }
 
   const email = user.email
-  const updatedUser: User = { ...user, name: name, message: message }
+  const updatedUser: User = { ...user, name: name, message: message, imageUrl: imageUrl }
 
   await kv.set<User>(email, updatedUser, { ex: 24 * 60 * 60, xx: true })
   await kv.set<User>(`token:${token}`, updatedUser, { ex: 24 * 60 * 60, xx: true })

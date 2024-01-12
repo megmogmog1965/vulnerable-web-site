@@ -1,6 +1,7 @@
 import { kv } from "@vercel/kv"
 import { unstable_noStore as noStore } from 'next/cache'
-import { User } from '../../../../src/interfaces'
+import { User } from '@/src/interfaces'
+import { isValidUrl } from "@/src/url"
 import { hash } from 'bcrypt'
 
 export async function POST(request: Request) {
@@ -10,7 +11,17 @@ export async function POST(request: Request) {
   const { email, password, name, message } = body
   const passwordHash = await hash(password, 10)
 
-  await kv.set<User>(email, { email: email, password: passwordHash, name: name, message: message }, { ex: 24 * 60 * 60, nx: true })
+  if (!isValidUrl(request.url)) {
+    return Response.json({ message: 'Invalid URL.' }, { status: 400 })
+  }
+
+  const imageUrl = new URL('/user.png', request.url)
+
+  await kv.set<User>(
+    email,
+    { email: email, password: passwordHash, name: name, message: message, imageUrl: imageUrl },
+    { ex: 24 * 60 * 60, nx: true },
+  )
   console.log(email, passwordHash, name)
 
   return Response.json({})

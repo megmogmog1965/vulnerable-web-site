@@ -3,4 +3,5 @@ export interface User {
   password: string
   name: string
   message: string
+  imageUrl: URL
 }
