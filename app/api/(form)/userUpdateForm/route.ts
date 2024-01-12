@@ -21,7 +21,6 @@ export async function POST(request: Request) {
   const imageUrl = new URL(imageUrlStr)
 
   const token = cookies().get('token')?.value
-  console.log(token)
   if (!token) {
     throw new Error('This is a bug.')
   }

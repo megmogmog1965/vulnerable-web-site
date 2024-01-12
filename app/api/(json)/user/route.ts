@@ -22,7 +22,6 @@ export async function POST(request: Request) {
     { email: email, password: passwordHash, name: name, message: message, imageUrl: imageUrl },
     { ex: 24 * 60 * 60, nx: true },
   )
-  console.log(email, passwordHash, name)
 
   return Response.json({})
 }

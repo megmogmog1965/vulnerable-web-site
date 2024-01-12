@@ -9,13 +9,13 @@ export default async function Home({
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
   const token = cookies().get('token')?.value
-  console.log(`token: ${token}`)
+
   if (!token) {
     throw new Error()
   }
 
   const user = await kv.get<User>(`token:${token}`)
-  console.log(`user: ${user}`)
+
   if (!user) {
     throw new Error()
   }

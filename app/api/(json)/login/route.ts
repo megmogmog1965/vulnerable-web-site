@@ -10,7 +10,6 @@ export async function POST(request: Request) {
   const { email, password } = body
 
   const user = await kv.get<User>(email)
-  console.log(user)
 
   // user existence.
   if (user === null) {
@@ -24,7 +23,6 @@ export async function POST(request: Request) {
 
   const token = btoa(await hash(Math.random().toString(32), 1))
   await kv.set<User>(`token:${token}`, user, { ex: 60 * 60 })
-  console.log(token)
 
   return Response.json({ token: token })
 }

@@ -19,7 +19,6 @@ export default function Home() {
 
     // password validation.
     if (passwordRef?.current?.value !== passwordConfirmationRef?.current?.value) {
-      console.log(`pa: ${passwordConfirmationRef?.current?.value}`)
       passwordConfirmationRef?.current?.setCustomValidity('Passwords Don\'t Match')
       passwordConfirmationRef?.current?.reportValidity()
       return
