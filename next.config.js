@@ -30,7 +30,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'vulnerable-web-site.vercel.app',
-        port: '443',
+        port: '',
         pathname: '/**',
       },
     ],
