@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useState, MouseEvent } from 'react'
+import React, { useState, MouseEvent, useRef } from 'react'
 import { useCookies } from "react-cookie"
 
 export default function Home() {
@@ -11,6 +11,8 @@ export default function Home() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const submitRef = useRef<HTMLButtonElement>(null)
 
   const [token, setCookie] = useCookies(['token'])
 
@@ -27,6 +29,8 @@ export default function Home() {
 
     // error handling.
     if (res.status < 200 || res.status >= 400) {
+      submitRef?.current?.setCustomValidity('Invalid Username or Password')
+      submitRef?.current?.reportValidity()
       return
     }
 
@@ -71,7 +75,7 @@ export default function Home() {
                           </div>
                           <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 line-through">Forgot password?</a>
                       </div>
-                      <button type="submit" onClick={onSubmit} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                      <button type="submit" onClick={onSubmit} ref={submitRef} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                           Don’t have an account yet? <Link href="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                       </p>
