@@ -26,6 +26,12 @@ Install Node.js modules.
 npm install
 ```
 
+This project uses Vercel KV. Please follow the following instructions.
+
+* [Prerequisites](https://vercel.com/docs/storage/vercel-kv/quickstart#prerequisites)
+* [Quickstart - Create a KV database](https://vercel.com/docs/storage/vercel-kv/quickstart#create-a-kv-database)
+* [Quickstart - Preparing your local project](https://vercel.com/docs/storage/vercel-kv/quickstart#preparing-your-local-project)
+
 Run the development server:
 
 ```bash
