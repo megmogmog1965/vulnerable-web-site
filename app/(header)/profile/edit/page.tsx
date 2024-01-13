@@ -41,7 +41,7 @@ export default async function Home({
             </div>
             <div>
               <label htmlFor="imageUrl" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Image URL</label>
-              <input type="text" id="imageUrl" name="imageUrl" defaultValue={user.imageUrl.toString()} className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="To prevent actual SSRF, Allowed hostname: &quot;127.0.0.1&quot;, &quot;localhost&quot;, &quot;vulnerable-web-site.vercel.app&quot;" required />
+              <input type="text" id="imageUrl" name="imageUrl" defaultValue={user.imageUrl.toString()} className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder={`http://127.0.0.1:3000/user.png`} required />
             </div>
             { searchParams.error
                 ? <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert"><span className="font-medium">Error : </span>{searchParams.error}</div>
