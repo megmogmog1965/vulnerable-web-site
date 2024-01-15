@@ -17,6 +17,11 @@ export default async function Home() {
     throw new Error()
   }
 
+  const image = process.env.ENABLE_SSRF !== 'true'
+    ? <Image src={user.imageUrl.toString()} width={200} height={200} alt="Invalid Image URL." className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg sm:w-52" />
+    /* eslint-disable-next-line @next/next/no-img-element */
+    : <img src={await createProfileImageAsDataUri(user)} width={200} height={200} alt="Invalid Image URL." className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg sm:w-52" />
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
@@ -26,7 +31,7 @@ export default async function Home() {
         </div>
         <div className="grid gap-8 mb-6 md:grid-cols-4">
           <div className="md:col-start-2 md:col-span-2 items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
-            <Image src={user.imageUrl.toString()} width={200} height={200} alt="Invalid Image URL." className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg sm:w-52" />
+            {image}
             <div className="p-5">
               <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                 <a href="#">{user.name}</a>
@@ -62,4 +67,13 @@ export default async function Home() {
       </div>
     </section>
   )
+}
+
+async function createProfileImageAsDataUri(user: User) {
+  const res = await fetch(user.imageUrl)
+  const buffer = await res.arrayBuffer()
+  const contentType = res.headers.get('Content-Type')
+  const base64Str = Buffer.from(buffer).toString('base64')
+
+  return `data:${contentType};base64,${base64Str}`
 }
