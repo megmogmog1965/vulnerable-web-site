@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useState, MouseEvent, useRef } from 'react'
+import { useState, useRef } from 'react'
 
 export default function Home() {
   const router = useRouter()
@@ -14,7 +14,7 @@ export default function Home() {
   const passwordRef = useRef<HTMLInputElement>(null)
   const passwordConfirmationRef = useRef<HTMLInputElement>(null)
 
-  const onSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
+  const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     // password validation.

@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useState, MouseEvent, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { useCookies } from "react-cookie"
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
 
   const [token, setCookie] = useCookies(['token'])
 
-  const onSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
+  const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
     const res = await fetch('/api/login', {

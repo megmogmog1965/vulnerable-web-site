@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { MouseEvent, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useCookies } from "react-cookie"
 import { initFlowbite } from 'flowbite'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -23,7 +23,7 @@ export default function RootLayout({
 
   const [token, setCookie, removeCookie] = useCookies(['token'])
 
-  const onClick = async (event: MouseEvent<HTMLAnchorElement>) => {
+  const onClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
 
     const res = await fetch('/api/logout', {
