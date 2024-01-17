@@ -3,9 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { MouseEvent } from 'react'
+import React, { MouseEvent, useEffect } from 'react'
 import { useCookies } from "react-cookie"
-import 'flowbite'
+import { initFlowbite } from 'flowbite'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithubSquare } from '@fortawesome/free-brands-svg-icons'
 
@@ -14,6 +14,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // https://github.com/themesberg/flowbite/issues/51#issuecomment-1666715704
+  useEffect(() => {
+    initFlowbite()
+  }, [])
+
   const router = useRouter()
 
   const [token, setCookie, removeCookie] = useCookies(['token'])
