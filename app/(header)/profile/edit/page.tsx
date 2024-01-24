@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { cookies } from 'next/headers'
-import { kv } from "@vercel/kv"
-import { User } from '@/src/interfaces'
+import { TokenStore } from '@/src/store'
 
 export default async function Home({
   searchParams,
@@ -14,7 +13,7 @@ export default async function Home({
     throw new Error()
   }
 
-  const user = await kv.get<User>(`token:${token}`)
+  const user = await TokenStore.get(token)
 
   if (!user) {
     throw new Error()

@@ -1,6 +1,6 @@
-import { kv } from "@vercel/kv"
 import { unstable_noStore as noStore } from 'next/cache'
 import { cookies } from 'next/headers'
+import { TokenStore } from '@/src/store'
 
 export async function POST(request: Request) {
   noStore()  // https://github.com/vercel/storage/issues/510
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const token = cookies().get('token')
 
   if (token) {
-    await kv.del(`token:${token.value}`)
+    await TokenStore.delete(token.value)
   }
 
   return Response.json({})

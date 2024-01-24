@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { kv } from "@vercel/kv"
+import { TokenStore } from '@/src/store'
 
 // https://nextjs.org/docs/app/building-your-application/routing/middleware
 export async function middleware(request: NextRequest) {
@@ -20,7 +20,7 @@ async function validToken(request: NextRequest): Promise<boolean> {
     return false
   }
 
-  if (await kv.get<string>(`token:${token.value}`) === null) {
+  if (await TokenStore.get(token.value) === null) {
     return false
   }
 

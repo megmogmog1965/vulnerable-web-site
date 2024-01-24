@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { cookies } from 'next/headers'
-import { kv } from "@vercel/kv"
 import { User } from '@/src/interfaces'
+import { TokenStore } from '@/src/store'
 
 export default async function Home() {
   const token = cookies().get('token')?.value
@@ -11,7 +11,7 @@ export default async function Home() {
     throw new Error()
   }
 
-  const user = await kv.get<User>(`token:${token}`)
+  const user = await TokenStore.get(token)
 
   if (!user) {
     throw new Error()
@@ -70,10 +70,15 @@ export default async function Home() {
 }
 
 async function createProfileImageAsDataUri(user: User) {
-  const res = await fetch(user.imageUrl)
-  const buffer = await res.arrayBuffer()
-  const contentType = res.headers.get('Content-Type')
-  const base64Str = Buffer.from(buffer).toString('base64')
+  try {
+    const res = await fetch(user.imageUrl)
+    const buffer = await res.arrayBuffer()
+    const contentType = res.headers.get('Content-Type')
+    const base64Str = Buffer.from(buffer).toString('base64')
 
-  return `data:${contentType};base64,${base64Str}`
+    return `data:${contentType};base64,${base64Str}`
+
+  } catch (e) {
+    return ''
+  }
 }

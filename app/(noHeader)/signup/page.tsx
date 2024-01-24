@@ -13,6 +13,7 @@ export default function Home() {
 
   const passwordRef = useRef<HTMLInputElement>(null)
   const passwordConfirmationRef = useRef<HTMLInputElement>(null)
+  const submitRef = useRef<HTMLButtonElement>(null)
 
   const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -34,6 +35,8 @@ export default function Home() {
 
     // error handling.
     if (res.status < 200 || res.status >= 400) {
+      submitRef?.current?.setCustomValidity('Cannot create user.')
+      submitRef?.current?.reportValidity()
       return
     }
 
@@ -67,7 +70,7 @@ export default function Home() {
                           <label htmlFor="passwordConfirmation" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
                           <input type="password" name="passwordConfirmation" id="passwordConfirmation" ref={passwordConfirmationRef} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={ false } />
                       </div>
-                      <button type="submit" onClick={onSubmit} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up</button>
+                      <button type="submit" onClick={onSubmit} ref={submitRef} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up</button>
                       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                           Do you already have an account? <Link href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</Link>
                       </p>

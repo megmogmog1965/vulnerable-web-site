@@ -1,7 +1,6 @@
-import { kv } from "@vercel/kv"
 import { unstable_noStore as noStore } from 'next/cache'
-import { User } from '@/src/interfaces'
 import { isValidUrl } from "@/src/url"
+import { UserStore } from '@/src/store'
 import { hash } from 'bcrypt'
 
 export async function POST(request: Request) {
@@ -17,10 +16,13 @@ export async function POST(request: Request) {
 
   const imageUrl = new URL('/user.png', request.url)
 
-  await kv.set<User>(
+  if (await UserStore.get(email)) {
+    return Response.json({ message: 'User already exists.' }, { status: 400 })
+  }
+
+  await UserStore.set(
     email,
     { email: email, password: passwordHash, name: name, message: message, imageUrl: imageUrl },
-    { ex: 24 * 60 * 60, nx: true },
   )
 
   return Response.json({})

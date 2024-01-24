@@ -1,6 +1,5 @@
-import { kv } from "@vercel/kv"
 import { unstable_noStore as noStore } from 'next/cache'
-import { User } from '@/src/interfaces'
+import { UserStore, TokenStore } from '@/src/store'
 import { hash, compare } from 'bcrypt'
 
 export async function POST(request: Request) {
@@ -9,7 +8,7 @@ export async function POST(request: Request) {
   const body = await request.json()
   const { email, password } = body
 
-  const user = await kv.get<User>(email)
+  const user = await UserStore.get(email)
 
   // user existence.
   if (user === null) {
@@ -22,7 +21,7 @@ export async function POST(request: Request) {
   }
 
   const token = btoa(await hash(Math.random().toString(32), 1))
-  await kv.set<User>(`token:${token}`, user, { ex: 60 * 60 })
+  await TokenStore.set(token, user)
 
   return Response.json({ token: token })
 }
