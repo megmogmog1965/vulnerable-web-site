@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
   if (!isValidUrl(imageUrlStr)) {
     const url = new URL(request.url)
-    const redirectUrl = new URL('profile/edit?error=To prevent actual SSRF, Allowed hostname: "127.0.0.1", "localhost", "vulnerable-web-site.vercel.app"', `${url.protocol}//${url.host}`)
+    const redirectUrl = new URL(`profile/edit?error=Invalid Image URL: ${imageUrlStr}`, `${url.protocol}//${url.host}`)
     return Response.redirect(redirectUrl)
   }
 

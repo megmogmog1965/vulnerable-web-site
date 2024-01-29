@@ -1,5 +1,5 @@
 import { unstable_noStore as noStore } from 'next/cache'
-import { isValidUrl } from "@/src/url"
+import { isAllowedUrl } from "@/src/url"
 import { UserStore } from '@/src/store'
 import { hash } from 'bcrypt'
 
@@ -10,8 +10,8 @@ export async function POST(request: Request) {
   const { email, password, name, message } = body
   const passwordHash = await hash(password, 10)
 
-  if (!isValidUrl(request.url)) {
-    return Response.json({ message: 'Invalid URL.' }, { status: 400 })
+  if (!isAllowedUrl(request.url)) {
+    return Response.json({ message: 'The URL is not allowed' }, { status: 400 })
   }
 
   const imageUrl = new URL('/user.png', request.url)

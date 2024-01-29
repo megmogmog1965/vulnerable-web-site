@@ -18,8 +18,14 @@ export default async function Home() {
             <Link href="https://jsfiddle.net/megmogmog/7w35ry2u/" className="text-blue-600 hover:underline dark:text-blue-500">https://jsfiddle.net/megmogmog/7w35ry2u/</Link>
           </p>
 
+          <h3 className="mb-4 text-2xl tracking-tight font-bold text-gray-900 dark:text-white">Stored XSS (Cross-Site Scripting)</h3>
+          <p className="mb-8 lg:mb-16 font-light text-gray-500 dark:text-gray-400 sm:text-xl">
+            <Link href="https://jsfiddle.net/megmogmog/74ro3hs2/" className="text-blue-600 hover:underline dark:text-blue-500">https://jsfiddle.net/megmogmog/74ro3hs2/</Link>
+          </p>
+
           <h3 className="mb-4 text-2xl tracking-tight font-bold text-gray-900 dark:text-white">SSRF (Server-Side Request Forgery)</h3>
-          <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">Set environment variable `ENABLE_SSRF=&quot;true&quot;`.</p>
+          <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">(Works localhost only)</p>
+          <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">Restart server with environment variable `ENABLE_SSRF=&quot;true&quot;`.</p>
           <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">Create `index.js` file as follows.</p>
           <pre className="mb-4 lg:mb-8 font-light text-sm sm:text-base">
             <code>
