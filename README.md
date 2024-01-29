@@ -15,6 +15,13 @@ This is a project to reproduce following web application vulnerabilities.
 
 https://vulnerable-web-site.vercel.app/
 
+## Environment Variables
+
+| Name | Description | Default |
+|:------|:-------------|:---------|
+| ENABLE_SSRF | Enable SSRF (Server-Side Request Forgery) vulnerability. | `false` |
+| ENABLE_CSP | Enable CSP (Content-Security-Policy) to prevent XSS. | `false` |
+
 ## Getting Started (Dev)
 
 First, install Node.js `v20.10.0`, or [volta].
