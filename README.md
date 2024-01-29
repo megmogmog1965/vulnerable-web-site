@@ -6,6 +6,10 @@ This is a project to reproduce following web application vulnerabilities.
 
 * CSRF (Cross-Site Request Forgery)
 * Clickjacking
+* Stored XSS (Cross-Site Scripting)
+* SSRF (Server-Side Request Forgery)*
+
+> *SSRF works only on localhost
 
 ## Demo on Vercel
 

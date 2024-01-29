@@ -24,7 +24,7 @@ export default async function Home() {
           </p>
 
           <h3 className="mb-4 text-2xl tracking-tight font-bold text-gray-900 dark:text-white">SSRF (Server-Side Request Forgery)</h3>
-          <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">(Works localhost only)</p>
+          <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">(Works only on localhost)</p>
           <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">Restart server with environment variable `ENABLE_SSRF=&quot;true&quot;`.</p>
           <p className="mb-4 lg:mb-8 font-light text-gray-500 dark:text-gray-400 sm:text-xl">Create `index.js` file as follows.</p>
           <pre className="mb-4 lg:mb-8 font-light text-sm sm:text-base">
